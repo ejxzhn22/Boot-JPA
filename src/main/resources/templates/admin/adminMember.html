@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="mainContainer">
+    <nav th:replace="fragments/admin-navbar :: admin-navbar"></nav>
+    <div class="main" >
+        <div  class="tableContainer" >
+
+            <div class="table_title">회원 관리</div>
+
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-secondary">
+                    <th scope="col">회원 아이디</th>
+                    <th scope="col">회원 이름</th>
+                    <th scope="col">회원 주소</th>
+                    <th scope="col">상세</th>
+                    <th scope="col">우편번호</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="member : ${members}">
+                    <th scope="row" th:text="${member.member_id}"></th>
+                    <td th:text="${member.member_name}"></td>
+                    <td th:text="${member.getAddress().getCity()}"></td>
+                    <td th:text="${member.getAddress().getStreet()}"></td>
+                    <td th:text="${member.getAddress().getZipcode()}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

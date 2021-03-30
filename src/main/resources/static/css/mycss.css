@@ -1,0 +1,39 @@
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.mainContainer{
+    height: 100%;
+}
+
+.main{
+    height: 732px;
+    box-sizing: border-box;
+}
+
+.tableContainer{
+    text-align: center;
+    width:70%;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+
+.formContainer{
+
+    text-align: center;
+    width:30%;
+    padding-top: 50px;
+    margin: 0 auto;
+    color: #f3969a;
+}
+
+.table_title{
+    color: #f3969a;
+    font-size: 35px;
+    margin-bottom: 60px;
+}
+
+table > tr {
+    height: 50px;
+}

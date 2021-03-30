@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="mainContainer">
+    <nav th:replace="fragments/admin-navbar :: admin-navbar"></nav>
+    <div class="main" >
+        <div  class="tableContainer" >
+
+            <div class="table_title">상품 관리</div>
+            <div style="float: right; margin-bottom: 30px;">
+                <a href="/admin/newItem" class="btn btn-secondary">상품 등록</a>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-secondary">
+                    <th scope="col">상품번호</th>
+                    <th scope="col">상품이름</th>
+                    <th scope="col">상품가격</th>
+                    <th scope="col">상품수량</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item : ${items}">
+                    <th scope="row" th:text="${item.item_no}"></th>
+                    <td th:text="${item.item_name}"></td>
+                    <td th:text="${item.item_price}"></td>
+                    <td th:text="${item.item_quantity}"></td>
+                    <td>
+                        <a href="#" th:href="@{/items/{item_no}/edit (item_no=${item.item_no})}" class="btn btn-outline-warning">수정</a>
+                        <a href="#" th:href="@{/items/{item_no}/delete (item_no=${item.item_no})}"  class="btn btn-outline-danger">삭제</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
