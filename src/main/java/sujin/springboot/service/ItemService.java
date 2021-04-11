@@ -63,18 +63,31 @@ public class ItemService {
         Member member = memberRepository.findByNo(member_no);
         Item item = itemRepository.findOne(item_no);
 
-        //장바구니 상품 생성
-        CartItem cartItem = CartItem.createCartItem(member,item,item.getItem_price(), count);
+        Boolean cart = itemRepository.duplicateCart(member, item);
+        log.info("cart? = "+String.valueOf(cart));
+        if(cart) {
+            //장바구니 상품 생성
+            CartItem cartItem = CartItem.createCartItem(member, item, item.getItem_price(), count);
 
-        //장바구니 저장
-        itemRepository.cartSave(cartItem);
+            //장바구니 저장
+            itemRepository.cartSave(cartItem);
+            return cartItem.getCart_item_no();
+        }else{
+            CartItem cartItem = (CartItem) itemRepository.fineOne(member, item);
+            cartItem.setCart_count(cartItem.getCart_count()+ count);
 
-        return cartItem.getCart_item_no();
+            return cartItem.getCart_item_no();
+        }
 
     }
 
     //장바구니 가져오기
     public List findCart(Member member) {
         return itemRepository.cartList(member);
+    }
+
+    //장바구니 가져오기
+    public List findCartTest(Member member) {
+        return itemRepository.cartListTest(member);
     }
 }

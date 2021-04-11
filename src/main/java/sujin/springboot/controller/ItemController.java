@@ -115,9 +115,16 @@ public class ItemController {
     //장바구니 이동
     @GetMapping("/items/carts")
     public String cartList(HttpSession session, Model model){
+        log.info("장바구니 이동 ");
         Member member = (Member)session.getAttribute("member");
+
+        log.info("member 조회");
         Member findMember = memberService.findOneByNo(member.getMember_no());
+        log.info("장바구니 리스트 조회");
         List cartItems = itemService.findCart(findMember);
+        log.info("장바구니 리스트 테스트");
+        List test = itemService.findCartTest(findMember);
+
 
 
         model.addAttribute("items",cartItems);

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+<div class="mainContainer">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="main" >
+        <div class="formContainer">
+            <div class="table_title">글 작성</div>
+            <form action="/board/newNotice" method="post" th:object="${boardForm}">
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="board_title" class="col-sm-2 col-form-label">TITLE</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <input type="text"  class="form-control-plaintext" th:field="*{board_title}" value="제목 입력">
+                    </div>
+                </div>
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="board_content" class="col-sm-2 col-form-label">CONTENT</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <textarea class="form-control" th:field="*{board_content}" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 102px;" ></textarea>
+                    </div>
+
+                </div>
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="board_writer" class="col-sm-2 col-form-label">WRITER</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <input type="text"  class="form-control-plaintext" th:field="*{board_writer}"  th:value="${boardForm.board_writer}" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="text-align: center">
+                    <div class="" style="margin-top: 30px; text-align: center; width: 100%;">
+                        <button type="submit" class="btn btn-secondary">작성 완료</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 public class Personal extends Board{
 
     private String board_writer;
-    private int board_answer;
+
 }

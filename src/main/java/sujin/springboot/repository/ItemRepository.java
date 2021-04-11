@@ -8,6 +8,7 @@ import sujin.springboot.domain.Item;
 import sujin.springboot.domain.Member;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,6 +56,33 @@ public class ItemRepository {
                             .setParameter("member", member)
                             .getResultList();
         return resultList;
+    }
+
+    //장바구니 리스트
+    public List cartListTest(Member member) {
+        log.info("조인 없이 장바구니 리스트 조회하기");
+        List resultList = em.createQuery("select c from CartItem c where c.member=:member")
+                .setParameter("member", member)
+                .getResultList();
+        return resultList;
+    }
+
+    //장바구니 아이템 하나 가져오기
+    public Object fineOne(Member member, Item item){
+        return em.createQuery("select c from CartItem c where c.member=:member and c.item=:item")
+                .setParameter("member", member)
+                .setParameter("item", item)
+                .getSingleResult();
+    }
+
+    //장바구니 담을 때 장바구니에 같은 아이템이 있는지 확인
+    public Boolean duplicateCart(Member member, Item item) {
+        List cartItem = em.createQuery("select c from CartItem c where c.member=:member and c.item=:item")
+                .setParameter("member", member)
+                .setParameter("item", item)
+                .getResultList();
+
+        return cartItem.size() == 0;
     }
 
 

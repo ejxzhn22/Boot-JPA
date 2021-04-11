@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+<div class="mainContainer">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="main" >
+        <div class="formContainer">
+            <div class="table_title">글 상세</div>
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="board_title" class="col-sm-2 col-form-label">TITLE</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <input type="text"  class="form-control-plaintext" th:field="*{board.board_title}"   readonly>
+                    </div>
+                </div>
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="board_content" class="col-sm-2 col-form-label">CONTENT</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <textarea class="form-control" th:field="*{board.board_content}" th:text="*{board.board_content}" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 102px;" readonly ></textarea>
+                    </div>
+
+                </div>
+                <div class="form-group row" style="text-align: center">
+                    <label th:for="member_id" class="col-sm-2 col-form-label">WRITER</label>
+                    <div class="" style="margin-left: 20px;    width: 400px;">
+                        <input type="text"  class="form-control-plaintext" th:field="*{member.member_id}" th:value="*{member.member_id}"  readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="text-align: center">
+                    <div class="" style="margin-top: 30px; text-align: center; width: 100%;">
+                        <a href="#" th:href="@{/board/{board_no}/edit (board_no=${board.board_no})}" class="btn btn-primary" role="button">수정</a>
+                        <a href="#" th:href="@{/board/{board_no}/delete (board_no=${board.board_no})}" class="btn btn-primary" role="button">삭제</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

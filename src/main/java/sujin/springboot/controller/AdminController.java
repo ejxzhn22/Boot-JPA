@@ -11,6 +11,7 @@ import sujin.springboot.domain.Item;
 import sujin.springboot.domain.Member;
 import sujin.springboot.dto.ItemForm;
 import sujin.springboot.dto.MemberForm;
+import sujin.springboot.service.BoardService;
 import sujin.springboot.service.ItemService;
 import sujin.springboot.service.MemberService;
 
@@ -23,6 +24,7 @@ public class AdminController {
 
     private final ItemService itemService;
     private final MemberService memberService;
+    private final BoardService boardService;
 
     //회원관리이동
     @GetMapping("/admin/member")
@@ -58,14 +60,19 @@ public class AdminController {
     }
 
     @GetMapping("/admin/notice")
-    public String notice() {
+    public String notice(Model model) {
         log.info("admin notice");
+        List notice = boardService.findNotice();
+        model.addAttribute("list",notice);
         return "/admin/adminNotice";
     }
 
     @GetMapping("/admin/qna")
-    public String qna() {
+    public String qna(Model model) {
         log.info("admin qna");
+        List qna = boardService.findQna();
+        model.addAttribute("list", qna);
+
         return "/admin/adminQna";
     }
 

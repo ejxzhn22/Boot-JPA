@@ -8,9 +8,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="dtype")
-@Getter
+@Getter @Setter
 public abstract class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,10 @@ public abstract class Board {
     @JoinColumn(name="answer_id")
     private Answer answer;
 
+    @PrePersist
+    public void createdAt() {
+        this.board_date = LocalDateTime.now();
+    }
 
     //== 연관관계 메서드 ==//
     public void setMember(Member member) {

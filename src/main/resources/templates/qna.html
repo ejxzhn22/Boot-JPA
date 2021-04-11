@@ -6,13 +6,13 @@
 </head>
 <body>
 <div class="mainContainer">
-    <nav th:replace="fragments/admin-navbar :: admin-navbar"></nav>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
     <div class="main" >
         <div  class="tableContainer" >
 
-            <div class="table_title">공지사항 관리</div>
+            <div class="table_title">Q&A</div>
             <div style="float: right; margin-bottom: 30px;">
-                <a href="/board/newNotice" class="btn btn-secondary">공지사항 등록</a>
+                <a href="/board/newQna" class="btn btn-secondary">질문 등록</a>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -26,12 +26,19 @@
                 </thead>
                 <tbody>
 
-                <tr th:each="notice : ${list}">
-                    <th scope="row" th:text="${notice.board_no}"></th>
-                    <td th:text="${notice.board_title}"></td>
-                    <td th:text="${notice.getMember().member_id}"></td>
-                    <td th:text="${notice.board_date}"></td>
-                    <td></td>
+                <tr th:each="qna : ${list}">
+                    <th scope="row" th:text="${qna.board_no}"></th>
+                    <td >
+                        <a href="#" th:href="@{/board/{board_no} (board_no=${qna.board_no})}" th:text="${qna.board_title}" class="btn btn-primary" role="button">
+                        </a>
+                    </td>
+                    <td th:text="${qna.board_writer}"></td>
+                    <td th:text="${qna.board_date}"></td>
+                    <td>
+
+                        <a  th:if="${qna.getAnswer()== null}"type="button" class="btn btn-outline-warning">답변 중</a>
+                        <a  th:if="${qna.getAnswer() != null}"type="button" class="btn btn-outline-warning">답변완료</a>
+                    </td>
                 </tr>
 
                 </tbody>

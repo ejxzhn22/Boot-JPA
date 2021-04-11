@@ -12,34 +12,40 @@
 
             <div class="table_title">장바구니</div>
 
-            <table class="table table-hover">
-                <thead>
-                <tr class="table-secondary">
-                    <th scope="col">상품번호</th>
-                    <th scope="col">상품이름</th>
-                    <th scope="col">상품가격</th>
-                    <th scope="col">상품수량</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
+            <form method="post" action="/kakaoPay">
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th scope="col">상품번호</th>
+                        <th scope="col">상품이름</th>
+                        <th scope="col">상품가격</th>
+                        <th scope="col">상품수량</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <tr th:each="item : ${items}">
-                    <th scope="row" th:text="${item.item.item_no}"></th>
-                    <td th:text="${item.item.item_name}"></td>
-                    <td th:text="${item.cart_price}"></td>
-                    <td th:text="${item.cart_count}"></td>
-                    <td>
+                    <tr th:each="item, index : ${items}">
+                        <th scope="row" th:text="${item.item.item_no}"></th>
+                        <td th:text="${item.item.item_name}"></td>
+                        <td th:field="price" th:text="${item.cart_price}"></td>
+                        <td th:field="count" th:text="${item.cart_count}"></td>
 
-                    </td>
-                </tr>
+                    </tr>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-outline-danger">주문하기</button>
+            </form>
+
         </div>
     </div>
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
+<script>
+
+
+</script>
 </html>
